@@ -80,4 +80,24 @@ public class OrderServiceTest {
             assertTrue(orderRepository.findById(3).isEmpty());
         }
     }
+    @Test
+public void placeOrderCalculatesTotalAmountForSeveralDishes() {
+    Order order = new Order(
+            10,
+            customer,
+            Arrays.asList(
+                    new Dish(11, "Пицца Маргарита", new BigDecimal("16.00")),
+                    new Dish(12, "Салат Цезарь", new BigDecimal("9.50")),
+                    new Dish(13, "Сок апельсиновый", new BigDecimal("4.50"))
+            )
+    );
+
+    Order savedOrder = orderService.placeOrder(order);
+
+    assertSame(order, savedOrder);
+    assertEquals(OrderStatus.CREATED, savedOrder.getStatus());
+    assertEquals(new BigDecimal("30.00"), savedOrder.calculateTotalAmount());
+    assertTrue(orderRepository.findById(10).isPresent());
+    assertEquals(1, orderRepository.findAll().size());
+}
 }
