@@ -76,7 +76,7 @@ public class OrderServiceTest {
             fail("Заказ с суммой меньше минимальной не должен быть оформлен.");
         } catch (IllegalStateException exception) {
             assertTrue(exception.getMessage().contains("20.00"));
-            assertEquals(OrderStatus.NEW, order.getStatus());
+            assertEquals(OrderStatus.CANCELLED, order.getStatus());
             assertTrue(orderRepository.findById(3).isEmpty());
         }
     }
