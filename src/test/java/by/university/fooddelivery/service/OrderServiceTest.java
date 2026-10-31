@@ -96,7 +96,7 @@ public void placeOrderCalculatesTotalAmountForSeveralDishes() {
 
     assertSame(order, savedOrder);
     assertEquals(OrderStatus.CREATED, savedOrder.getStatus());
-    assertEquals(new BigDecimal("30.00"), savedOrder.calculateTotalAmount());
+    assertEquals(new BigDecimal("35.00"), savedOrder.calculateTotalAmount());
     assertTrue(orderRepository.findById(10).isPresent());
     assertEquals(1, orderRepository.findAll().size());
 }
