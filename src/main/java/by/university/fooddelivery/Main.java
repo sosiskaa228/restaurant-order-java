@@ -112,7 +112,7 @@ public class Main {
 
     private static String loadDeliveryMode() {
         try (InputStream input = Main.class.getResourceAsStream("/application.properties")) {
-            if (input == null){ 
+            if (input == null) { 
                 return "day";
             }
             Properties properties = new Properties();
