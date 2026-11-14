@@ -10,10 +10,24 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
                 withEnv(["PATH+MAVEN=D:\\Programs\\Maven\\apache-maven-3.9.16\\bin"]) {
                     bat 'mvn compile'
+                }
+            }
+        }
+
+        stage('Static Analysis') {
+            steps {
+                withEnv(["PATH+MAVEN=D:\\Programs\\Maven\\apache-maven-3.9.16\\bin"]) {
+                    bat 'mvn checkstyle:check'
                 }
             }
         }
